@@ -54,21 +54,22 @@ BEGIN
         -- Create the full HTML body
         SET @Html = 
             N'<h4 style="font-weight: bold; color: red;">Multiple Failed Login Attempts Detected on ' + @@SERVERNAME + '.</h4>' + 
+			 N'<p><b>Server:</b> ' + @@SERVERNAME + N'<br>
+            <b>Total Login Failure Count:</b> ' + CAST(@FailedLoginCount AS NVARCHAR(55)) + N'<br>
+            <b>Job Name:</b> DBA - Eagle Eye Excessive Login Failure Monitor<br>
+            <b>Reporting Date:</b> ' + CONVERT(NVARCHAR(55), GETDATE(), 120) + N'</p>' +
             '<table border="1" style="padding: 5px; color: black; font-family: Segoe UI; text-align: left; border-collapse: collapse; width: 100%;">
                 <tr style="font-size: 12px; font-weight: normal; background: #BABABB;">
                     <th>Failed Login Count</th>
                     <th>Latest Login Date</th>
                     <th>Message</th>
                 </tr>' + @Html + 
-            '</table>' +
-            N'<p><b>Server:</b> ' + @@SERVERNAME + N'<br>
-            <b>Total Login Failure Count:</b> ' + CAST(@FailedLoginCount AS NVARCHAR(55)) + N'<br>
-            <b>Job Name:</b> DBA - Eagle Eye Excessive Login Failure Monitor<br>
-            <b>Reporting Date:</b> ' + CONVERT(NVARCHAR(55), GETDATE(), 120) + N'</p>';
+            '</table>' 
+           
 
         -- Send the email alert
         EXEC msdb.dbo.sp_send_dbmail 
-            @recipients = 'email@domain.com',
+            @recipients = 'athena.sql.lab@outlook.com',
             @subject = @Subject,
             @body = @Html,
             @body_format = 'HTML';
