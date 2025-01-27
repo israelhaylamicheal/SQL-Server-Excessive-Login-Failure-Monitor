@@ -4,8 +4,8 @@ GO
 
 CREATE OR ALTER PROCEDURE [dbo].[usp_MonitorExcessiveLoginFailures] 
 (
-    @Duration INT,              -- Time window in minutes to check for failed Login attempts
-    @AlertThreshold INT         -- Threshold for sending an alert
+    @Duration INT,              -- Time window in minutes to check for failed Login attempts.
+    @AlertThreshold INT         -- Minimum number of login failures for sending an alert.
 )
 AS
 BEGIN
