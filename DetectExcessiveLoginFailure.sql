@@ -68,7 +68,7 @@ BEGIN
         
         -- Send the email alert
         EXEC msdb.dbo.sp_send_dbmail 
-            @recipients = 'athena.sql.lab@outlook.com',
+            @recipients = 'email@domain.com',
             @subject = @Subject,
             @body = @Html,
             @body_format = 'HTML';
