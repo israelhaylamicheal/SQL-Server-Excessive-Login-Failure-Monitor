@@ -65,8 +65,7 @@ BEGIN
                     <th>Message</th>
                 </tr>' + @Html + 
             '</table>' 
-           
-
+        
         -- Send the email alert
         EXEC msdb.dbo.sp_send_dbmail 
             @recipients = 'athena.sql.lab@outlook.com',
